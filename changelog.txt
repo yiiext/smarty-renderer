@@ -1,2 +1,7 @@
+0.9.5
+[*] YiiExt naming conventions changed, see readme.
+[*] Smarty 3 comatibility.
+[*] t and link plugin functions.
+
 0.9
 [+] Initial public release.

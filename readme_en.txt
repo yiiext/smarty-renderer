@@ -1,10 +1,10 @@
-CSmartyViewRenderer
-===================
+Smarty View Renderer
+====================
 
-This extension allows you to use [Smarty](http://www.smarty.net/) templates in Yii.
+This extension allows you to use [Smarty](http://www.smarty.net/) version 2 or 3 templates in Yii.
 
 ###Resources
-* [SVN](http://code.google.com/p/yiiext/source/browse/#svn/trunk/app/extensions/CSmartyViewRenderer)
+* [SVN](http://code.google.com/p/yiiext/source/browse/#svn/trunk/app/extensions/yiiext/renderers/smarty)
 * [Smarty](http://www.smarty.net/)
 * [Discuss](http://www.yiiframework.com/forum/index.php?/topic/4925-smarty-view-renderer/)
 * [Report a bug](http://code.google.com/p/yiiext/issues/list)
@@ -19,7 +19,7 @@ This extension allows you to use [Smarty](http://www.smarty.net/) templates in Y
 ~~~
 [php]
 'viewRenderer'=>array(
-  'class'=>'application.extensions.CSmartyViewRenderer.CSmartyViewRenderer',
+  'class'=>'application.extensions.yiiext.renderers.smarty.ESmartyViewRenderer',
     'fileExtension' => '.tpl',
     //'pluginsDir' => 'application.smartyPlugins',
     //'configDir' => 'application.smartyConfig',

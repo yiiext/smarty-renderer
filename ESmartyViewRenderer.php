@@ -17,9 +17,9 @@
  * @link http://www.yiiframework.com/
  * @link http://www.smarty.net/
  *
- * @version 0.9
+ * @version 0.9.5
  */
-class CSmartyViewRenderer extends CApplicationComponent implements IViewRenderer {
+class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer {
     public $fileExtension='.tpl';
     public $filePermission=0755;
     public $pluginsDir = null;
@@ -31,6 +31,9 @@ class CSmartyViewRenderer extends CApplicationComponent implements IViewRenderer
      * Component initialization
      */
     function init(){
+        // needed by Smarty 3
+        define('SMARTY_SPL_AUTOLOAD', 1);
+
         Yii::import('application.vendors.*');
         require_once('Smarty/Smarty.class.php');
 
@@ -56,8 +59,8 @@ class CSmartyViewRenderer extends CApplicationComponent implements IViewRenderer
             $this->smarty->config_dir = Yii::getPathOfAlias($this->configDir);
         }
         
-        $this->smarty->assign("TIME",sprintf('%0.5f',Yii::getLogger()->getExecutionTime()));
-        $this->smarty->assign("MEMORY",round(Yii::getLogger()->getMemoryUsage()/(1024*1024),2)." MB");
+        $this->smarty->assign("TIME", sprintf('%0.5f',Yii::getLogger()->getExecutionTime()));
+        $this->smarty->assign("MEMORY", round(Yii::getLogger()->getMemoryUsage()/(1024*1024),2)." MB");
     }
 
     /**
@@ -75,10 +78,12 @@ class CSmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 
         // check if view file exists
         if(!is_file($sourceFile) || ($file=realpath($sourceFile))===false)
-            throw new CException(Yii::t('yii','View file "{file}" does not exist.', array('{file}'=>$sourceFile)));
+            throw new CException(Yii::t('yiiext','View file "{file}" does not exist.', array('{file}'=>$sourceFile)));
             
-        //assign data
-        $this->smarty->_tpl_vars = $data;
+        //assign data        
+        foreach($data as $element => $value) {
+            $this->smarty->assign($element, $value);
+        }
         
         //render
         return $this->smarty->fetch($sourceFile);
