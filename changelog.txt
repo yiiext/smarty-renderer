@@ -1,3 +1,9 @@
+0.9.6
+[*] Changed translation category to 'yiiext'.
+[*] New naming conventions.
+[+] readme_ru.
+[+] Added $Yii variable.
+
 0.9.5
 [*] YiiExt naming conventions changed, see readme.
 [+] Smarty 3 comatibility.

@@ -1,23 +1,12 @@
 <?php
 /**
- * Smarty renderer for Yii
- *
- * Copy latest version of Smarty (libs contents) to vendors/Smarty/.
- *
- * Add the following to your config file 'components' section:
- *
- * 'viewRenderer'=>array(
- *     'class'=>'application.extensions.Smarty.CSmartyViewRenderer',
- *     'fileExtension' => '.tpl',
- *     //'pluginsDir' => 'application.smartyPlugins',
- *     //'configDir' => 'application.smartyConfig',
- *  ),
+ * Smarty view renderer
  *
  * @author Alexander Makarov <sam@rmcreative.ru>
- * @link http://www.yiiframework.com/
+ * @link http://code.google.com/p/yiiext/
  * @link http://www.smarty.net/
  *
- * @version 0.9.5
+ * @version 0.9.6
  */
 class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer {
     public $fileExtension='.tpl';
@@ -61,6 +50,7 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
         
         $this->smarty->assign("TIME", sprintf('%0.5f',Yii::getLogger()->getExecutionTime()));
         $this->smarty->assign("MEMORY", round(Yii::getLogger()->getMemoryUsage()/(1024*1024),2)." MB");
+        $this->quicky->assign('Yii', Yii::app());
     }
 
     /**
