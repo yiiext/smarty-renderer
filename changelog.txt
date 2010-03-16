@@ -1,5 +1,5 @@
 next
-[*] Fixed `Yii` variable assignment.
+[*] Code cleanup and minor fixes.
 
 0.9.6
 [*] Changed translation category to 'yiiext'.

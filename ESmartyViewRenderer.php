@@ -70,10 +70,8 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
         if(!is_file($sourceFile) || ($file=realpath($sourceFile))===false)
             throw new CException(Yii::t('yiiext','View file "{file}" does not exist.', array('{file}'=>$sourceFile)));
             
-        //assign data        
-        foreach($data as $element => $value) {
-            $this->smarty->assign($element, $value);
-        }
+        //assign data                
+		$this->smarty->assign($data);
         
         //render
         return $this->smarty->fetch($sourceFile);
