@@ -50,7 +50,7 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
         
         $this->smarty->assign("TIME", sprintf('%0.5f',Yii::getLogger()->getExecutionTime()));
         $this->smarty->assign("MEMORY", round(Yii::getLogger()->getMemoryUsage()/(1024*1024),2)." MB");
-        $this->quicky->assign('Yii', Yii::app());
+        $this->smarty->assign('Yii', Yii::app());
     }
 
     /**

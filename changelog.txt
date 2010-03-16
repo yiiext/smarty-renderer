@@ -1,3 +1,6 @@
+next
+[*] Fixed `Yii` variable assignment.
+
 0.9.6
 [*] Changed translation category to 'yiiext'.
 [*] New naming conventions.
