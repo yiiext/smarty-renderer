@@ -1,4 +1,4 @@
-next
+0.9.7
 [*] Code cleanup and minor fixes.
 
 0.9.6
