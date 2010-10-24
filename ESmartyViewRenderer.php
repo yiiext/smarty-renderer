@@ -20,11 +20,16 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
      * Component initialization
      */
     function init(){
-        // needed by Smarty 3
-        define('SMARTY_SPL_AUTOLOAD', 1);
-
         Yii::import('application.vendors.*');
+
+        // need this since Yii autoload handler raises an error if class is not found
+        spl_autoload_unregister(array('YiiBase','autoload'));
+
+        // including Smarty class and registering autoload handler
         require_once('Smarty/Smarty.class.php');
+
+        // adding back Yii autoload handler
+        spl_autoload_register(array('YiiBase','autoload'));
 
         $this->smarty = new Smarty();
 
