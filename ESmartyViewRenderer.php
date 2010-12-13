@@ -78,7 +78,10 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
         //assign data
 		$this->smarty->assign($data);
 
-        //render
-        return $this->smarty->fetch($sourceFile);
+        //render or return
+		if($return)
+        	return $this->smarty->fetch($sourceFile);
+		else
+			$this->smarty->display($sourceFile);
 	}
 }

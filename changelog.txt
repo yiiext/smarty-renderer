@@ -1,16 +1,25 @@
+next
+----
+- Fixed renderFile method (Sam Dark)
+- Fixed bug with autoload Smarty 3 files in *nix (maksimgrib)
+
 0.9.7
-[*] Code cleanup and minor fixes.
+-----
+- Code cleanup and minor fixes.
 
 0.9.6
-[*] Changed translation category to 'yiiext'.
-[*] New naming conventions.
-[+] readme_ru.
-[+] Added $Yii variable.
+-----
+- Changed translation category to 'yiiext'.
+- New naming conventions.
+- readme_ru.
+- Added $Yii variable.
 
 0.9.5
-[*] YiiExt naming conventions changed, see readme.
-[+] Smarty 3 comatibility.
-[+] t and link plugin functions.
+-----
+- YiiExt naming conventions changed, see readme.
+- Smarty 3 comatibility.
+- t and link plugin functions.
 
 0.9
-[+] Initial public release.
+---
+- Initial public release (Sam Dark)
