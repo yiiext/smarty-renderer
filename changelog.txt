@@ -1,5 +1,5 @@
-next
-----
+0.9.8
+-----
 - Fixed renderFile method (Sam Dark)
 - Fixed bug with autoload Smarty 3 files in *nix (maksimgrib)
 

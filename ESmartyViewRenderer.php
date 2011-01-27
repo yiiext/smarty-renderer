@@ -6,7 +6,7 @@
  * @link http://code.google.com/p/yiiext/
  * @link http://www.smarty.net/
  *
- * @version next
+ * @version 0.9.8
  */
 class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer {
     public $fileExtension='.tpl';
