@@ -93,7 +93,7 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 
 		// create compiled directory if not exists
 		if(!file_exists($compileDir)){
-			mkdir($compileDir, $this->filePermission, true);
+			mkdir($compileDir, $this->directoryPermission, true);
 		}
 		$this->smarty->compile_dir = $compileDir; // no check for trailing /, smarty does this for us
 
