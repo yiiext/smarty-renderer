@@ -25,6 +25,7 @@ This extension allows you to use [Smarty](http://www.smarty.net/) version 2 or 3
     //'configDir' => 'application.smartyConfig',
 ),
 ~~~
+There are some more options on configuring Smarty properties now. Will add documentation soon.
 
 ###Usage
 * [Smarty documentation](http://www.smarty.net/docs.php).

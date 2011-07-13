@@ -27,6 +27,7 @@
     //'configDir' => 'application.smartyConfig',
 ),
 ~~~
+There are some more options on configuring Smarty properties now. Will add documentation soon.
 
 ###Использование
 * [Документация Smarty](http://www.smarty.net/docs.php).

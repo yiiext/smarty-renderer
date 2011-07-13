@@ -1,3 +1,8 @@
+0.9.9
+-----
+- Added possiblity to configure smarty properties (cebe)
+- Fixed issue with rendering Widgets within a template (cebe)
+
 0.9.8
 -----
 - Fixed renderFile method (Sam Dark)
