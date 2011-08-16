@@ -1,3 +1,8 @@
+1.0.0
+-----
+- changed autoload handling to work also when Yii autoloader has been modified (cebe)
+- ensure Smarty does not use SMARTY_SPL_AUTOLOAD (cebe)
+
 0.9.9
 -----
 - Added possiblity to configure smarty properties (CAUTION: behavior of $filePermission changed) (cebe)
