@@ -11,6 +11,7 @@ This extension allows you to use [Smarty](http://www.smarty.net/) version 2 or 3
 
 ###Requirements
 * Yii 1.0 or above
+* Smarty 3.0.8 or above
 
 ###Installation
 * Extract the release file under `protected/extensions`.
