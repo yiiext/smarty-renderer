@@ -1,3 +1,7 @@
+1.0.1
+-----
+- Smarty 3.1 compatibility (Sam Dark)
+
 1.0.0
 -----
 - changed autoload handling to work also when Yii autoloader has been modified (cebe)

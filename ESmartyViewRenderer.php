@@ -106,7 +106,7 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 		$this->smarty->compile_dir = $compileDir; // no check for trailing /, smarty does this for us
 
 
-		$this->smarty->plugins_dir[] = Yii::getPathOfAlias('application.extensions.Smarty.plugins');
+		$this->smarty->plugins_dir = array_merge($this->smarty->plugins_dir, array(Yii::getPathOfAlias('application.extensions.Smarty.plugins')));
 		if(!empty($this->pluginsDir)){
 			$this->smarty->plugins_dir[] = Yii::getPathOfAlias($this->pluginsDir);
 		}
