@@ -142,9 +142,9 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 
 		//render or return
 		if($return)
-			return $template->fetch($sourceFile);
+			return $template->fetch();
 		else
-			$template->display($sourceFile);
+			$template->display();
 	}
 
 	/**
