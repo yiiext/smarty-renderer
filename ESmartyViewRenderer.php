@@ -95,7 +95,7 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 		$this->smarty->_file_perms = $this->filePermission;
 		$this->smarty->_dir_perms = $this->directoryPermission;
 
-		$this->smarty->template_dir = '';
+		$this->smarty->setTemplateDir('');
 		$compileDir = isset($this->config['compile_dir']) ?
 					  $this->config['compile_dir'] : Yii::app()->getRuntimePath().'/smarty/compiled/';
 
@@ -103,16 +103,16 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 		if(!file_exists($compileDir)){
 			mkdir($compileDir, $this->directoryPermission, true);
 		}
-		$this->smarty->compile_dir = $compileDir; // no check for trailing /, smarty does this for us
+		$this->smarty->setCompileDir($compileDir); // no check for trailing /, smarty does this for us
 
 
-		$this->smarty->plugins_dir = array_merge($this->smarty->plugins_dir, array(Yii::getPathOfAlias('application.extensions.Smarty.plugins')));
+		$this->smarty->addPluginsDir(Yii::getPathOfAlias('application.extensions.Smarty.plugins'));
 		if(!empty($this->pluginsDir)){
-			$this->smarty->plugins_dir[] = Yii::getPathOfAlias($this->pluginsDir);
+			$this->smarty->addPluginsDir(Yii::getPathOfAlias($this->pluginsDir));
 		}
 
 		if(!empty($this->configDir)){
-			$this->smarty->config_dir = Yii::getPathOfAlias($this->configDir);
+			$this->smarty->addConfigDir(Yii::getPathOfAlias($this->configDir));
 		}
 	}
 
@@ -126,7 +126,7 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 	 * @return mixed the rendering result, or null if the rendering result is not needed.
 	 */
 	public function renderFile($context,$sourceFile,$data,$return) {
-		// current controller properties will be accessible as {$this.property}
+		// current controller properties will be accessible as {$this->property}
 		$data['this'] = $context;
 		// Yii::app()->... is available as {Yii->...} (deprecated, use {Yii::app()->...} instead, Smarty3 supports this.)
 		$data['Yii'] = Yii::app();
@@ -145,5 +145,13 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 			return $template->fetch($sourceFile);
 		else
 			$template->display($sourceFile);
+	}
+
+	/**
+	 * removes all files from compile dir
+	 */
+	public function clearCompileDir()
+	{
+		$this->smarty->clearCompiledTemplate();
 	}
 }
