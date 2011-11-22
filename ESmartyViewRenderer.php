@@ -4,10 +4,10 @@
  *
  * @author Alexander Makarov <sam@rmcreative.ru>
  * @author Carsten Brandt <mail@cebe.cc>
- * @link http://code.google.com/p/yiiext/
+ * @link http://yiiext.github.com/extensions/smarty-renderer/index.html
  * @link http://www.smarty.net/
  *
- * @version 1.0.0
+ * @version 1.0.1
  */
 class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 {

@@ -4,14 +4,14 @@ Smarty view renderer
 This extension allows you to use [Smarty](http://www.smarty.net/) version 2 or 3 templates in Yii.
 
 ###Resources
-* [SVN](http://code.google.com/p/yiiext/source/browse/trunk/app/extensions#extensions/yiiext/renderers/smarty)
+* [Github](https://github.com/yiiext/smarty-renderer)
 * [Smarty](http://www.smarty.net/)
 * [Discuss](http://www.yiiframework.com/forum/index.php?/topic/4925-smarty-view-renderer/)
-* [Report a bug](http://code.google.com/p/yiiext/issues/list)
+* [Report a bug](https://github.com/yiiext/smarty-renderer/issues)
 
 ###Requirements
 * Yii 1.0 or above
-* Smarty 3.0.8 or above
+* Smarty 3.0.6 or above
 
 ###Installation
 * Extract the release file under `protected/extensions`.

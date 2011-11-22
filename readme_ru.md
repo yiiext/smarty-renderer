@@ -5,14 +5,14 @@
 или 3 в шаблонах Yii.
 
 ###Полезные ссылки
-* [SVN](http://code.google.com/p/yiiext/source/browse/trunk/app/extensions#extensions/yiiext/renderers/smarty)
+* [Github](https://github.com/yiiext/smarty-renderer)
 * [Smarty](http://www.smarty.net/)
 * [Обсуждение](http://yiiframework.ru/forum/viewtopic.php?f=9&t=241)
-* [Соощить об ошибке](http://code.google.com/p/yiiext/issues/list)
+* [Соощить об ошибке](https://github.com/yiiext/smarty-renderer/issues)
 
 ###Требования
 * Yii 1.0 и выше
-* Smarty 3.0.8 и выше
+* Smarty 3.0.6 и выше
 
 ###Установка
 * Распаковать в `protected/extensions`.

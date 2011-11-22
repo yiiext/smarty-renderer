@@ -1,6 +1,8 @@
 1.0.1
 -----
-- Smarty 3.1 compatibility (Sam Dark)
+- Smarty 3.1 compatibility (Sam Dark, cebe)
+- Fixed a problem with nested template rendering and Smarty 3.1.x (cebe)
+- Tested compatibility with Smarty 3.0.6-9 and Smarty 3.1.0-5 [ci](http://yiiext.cebe.cc:8080/job/yiiext-smarty-renderer-phpunit/) (cebe)
 
 1.0.0
 -----
