@@ -1,8 +1,7 @@
 Шаблонизатор Smarty для Yii
 ===========================
 
-Данное расширение позволяет использовать [Smarty](http://www.smarty.net/) версии 2
-или 3 в шаблонах Yii.
+Данное расширение позволяет использовать [Smarty](http://www.smarty.net/) версии 3 отображении Yii.
 
 ###Полезные ссылки
 * [Github](https://github.com/yiiext/smarty-renderer)
@@ -26,6 +25,11 @@
     'fileExtension' => '.tpl',
     //'pluginsDir' => 'application.smartyPlugins',
     //'configDir' => 'application.smartyConfig',
+    //'prefilters' => array(array('MyClass','filterMethod')),
+    //'postfilters' => array(),
+    //'config'=>array(
+    //    'force_compile' => YII_DEBUG,
+    //   ... any Smarty object parameter
 ),
 ~~~
 There are some more options on configuring Smarty properties now. Will add documentation soon.

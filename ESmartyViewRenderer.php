@@ -4,10 +4,11 @@
  *
  * @author Alexander Makarov <sam@rmcreative.ru>
  * @author Carsten Brandt <mail@cebe.cc>
+ * @author Grigori Kochanov <public@grik.net>
  * @link http://yiiext.github.com/extensions/smarty-renderer/index.html
  * @link http://www.smarty.net/
  *
- * @version 1.0.1
+ * @version 1.0.2
  */
 class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 {
@@ -35,6 +36,28 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 	public $pluginsDir = null;
 
 	/**
+	 * A list of the prefilters to be attached
+	 * 
+	 * Elements are the callback identifiers (see call_user_func()).
+	 * 
+	 * If the filter is defined as a string, and the function is not defined,
+	 * the file prefilter.[filtername].php is loaded with include()
+	 * 
+ 	 * Callbacks defined as arrays, e.g. array('prefilterClass','foo')
+	 * will utilize yii autoload routine to load filters for compilation only 
+	 * 
+	 * @var array 
+	 */
+	public $prefilters = array();
+	
+	/**
+	 * List of postfilters to be registered
+	 * @see $prefilters, replace 'prefilter' with 'postfilter' 
+	 * @var array
+	 */
+	public $postfilters = array();
+	
+	/**
 	 * @var null|string yii alias of the directory where your smarty template-configs are located
 	 */
 	public $configDir = null;
@@ -54,7 +77,7 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 	/**
 	 * @var Smarty smarty instance for rendering
 	 */
-	private $smarty = null;
+	protected $smarty = null;
 
 	/**
 	 * Component initialization
@@ -106,14 +129,55 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 		$this->smarty->setCompileDir($compileDir); // no check for trailing /, smarty does this for us
 
 
-		$this->smarty->addPluginsDir(Yii::getPathOfAlias('application.extensions.Smarty.plugins'));
+		$this->smarty->addPluginsDir(Yii::getPathOfAlias('application.extensions.smarty.plugins'));
 		if(!empty($this->pluginsDir)){
-			$this->smarty->addPluginsDir(Yii::getPathOfAlias($this->pluginsDir));
+		    $plugin_path = Yii::getPathOfAlias($this->pluginsDir);
+			$this->smarty->addPluginsDir($plugin_path);
 		}
 
+		if ($this->prefilters){
+			foreach ($this->prefilters as $filter) {
+			    $this->registerFilter('pre',$filter);
+			}
+		}
+		
+		if ($this->postfilters){
+			foreach ($this->postfilters as $filter) {
+			    $this->registerFilter('post',$filter);
+			}
+		}
 		if(!empty($this->configDir)){
 			$this->smarty->addConfigDir(Yii::getPathOfAlias($this->configDir));
 		}
+	}
+	
+	/**
+	 * @return Smarty
+	 */
+	function getSmarty(){
+	    return $this->smarty;
+	}
+	
+	/**
+	 * Add a pre or post filter defined in yii config
+	 * 
+	 * @param const $type
+	 * @param callback $filter
+	 */
+	function registerFilter($type,$filter){
+	    if (is_string($filter)){
+		    if (!function_exists($filter)){
+		        $filter_file = Yii::getPathOfAlias($this->pluginsDir).'/'.$type.'filter.'.$filter.'.php';
+			    if (!file_exists($filter_file)){
+			        throw new CException('Filter file '.$filter_file.' not found');
+			    }
+			    include $filter_file;
+			    if (!function_exists($filter)){
+			        throw new CException('Callback '.$filter.' was not found in the included file');
+			    }
+		    }
+	    }
+	    $this->smarty->registerFilter($type, $filter);
 	}
 
 	/**
@@ -139,7 +203,8 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 			throw new CException(Yii::t('yiiext','View file "{file}" does not exist.', array('{file}'=>$sourceFile)));
 
 		$template = $this->smarty->createTemplate($sourceFile, null, null, $data, true);
-
+		/* @var $template Smarty_Internal_Template */
+		
 		//render or return
 		if($return)
 			return $template->fetch();
