@@ -1,6 +1,6 @@
 1.0.2
 -----
-- Added ability to define pre- and postfilters in yii config.
+- Added ability to define pre- and postfilters in yii config (grigori)
   Filters defined with a class-method array callback syntax are lazy-loaded by yii autoloader
   for compilation only.
 

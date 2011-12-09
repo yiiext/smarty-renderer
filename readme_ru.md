@@ -1,7 +1,7 @@
 Шаблонизатор Smarty для Yii
 ===========================
 
-Данное расширение позволяет использовать [Smarty](http://www.smarty.net/) версии 3 отображении Yii.
+Данное расширение позволяет использовать [Smarty](http://www.smarty.net/) версии 3 в приложениях Yii.
 
 ###Полезные ссылки
 * [Github](https://github.com/yiiext/smarty-renderer)
