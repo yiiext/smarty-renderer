@@ -1,7 +1,7 @@
 Smarty view renderer
 ====================
 
-This extension allows you to use [Smarty](http://www.smarty.net/) version 2 or 3 templates in Yii.
+This extension allows you to use [Smarty](http://www.smarty.net/) version 3 templates in Yii.
 
 ###Resources
 * [Github](https://github.com/yiiext/smarty-renderer)
@@ -25,6 +25,12 @@ This extension allows you to use [Smarty](http://www.smarty.net/) version 2 or 3
     'fileExtension' => '.tpl',
     //'pluginsDir' => 'application.smartyPlugins',
     //'configDir' => 'application.smartyConfig',
+    //'prefilters' => array(array('MyClass','filterMethod')),
+    //'postfilters' => array(),
+    //'config'=>array(
+    //    'force_compile' => YII_DEBUG,
+    //   ... any Smarty object parameter
+    //)
 ),
 ~~~
 There are some more options on configuring Smarty properties now. Will add documentation soon.
