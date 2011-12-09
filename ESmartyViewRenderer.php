@@ -36,7 +36,8 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 	public $pluginsDir = null;
 
 	/**
-	 * A list of the prefilters to be attached
+	 * @var array A list of the prefilters to be attached
+	 * @since 1.0.2
 	 * 
 	 * Elements are the callback identifiers (see call_user_func()).
 	 * 
@@ -45,15 +46,13 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 	 * 
  	 * Callbacks defined as arrays, e.g. array('prefilterClass','foo')
 	 * will utilize yii autoload routine to load filters for compilation only 
-	 * 
-	 * @var array 
 	 */
 	public $prefilters = array();
 	
 	/**
-	 * List of postfilters to be registered
+	 * @var array List of postfilters to be registered
 	 * @see $prefilters, replace 'prefilter' with 'postfilter' 
-	 * @var array
+	 * @since 1.0.2
 	 */
 	public $postfilters = array();
 	
@@ -152,19 +151,21 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 	}
 	
 	/**
+	 * @since 1.0.2
 	 * @return Smarty
 	 */
-	function getSmarty(){
+	public function getSmarty(){
 	    return $this->smarty;
 	}
 	
 	/**
 	 * Add a pre or post filter defined in yii config
 	 * 
+	 * @since 1.0.2
 	 * @param const $type
 	 * @param callback $filter
 	 */
-	function registerFilter($type,$filter){
+	public function registerFilter($type,$filter){
 	    if (is_string($filter)){
 		    if (!function_exists($filter)){
 		        $filter_file = Yii::getPathOfAlias($this->pluginsDir).'/'.$type.'filter.'.$filter.'.php';
@@ -182,7 +183,9 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 
 	/**
 	 * Renders a view file.
+	 * 
 	 * This method is required by {@link IViewRenderer}.
+	 * 
 	 * @param CBaseController the controller or widget who is rendering the view file.
 	 * @param string the view file path
 	 * @param mixed the data to be passed to the view
@@ -214,6 +217,7 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 
 	/**
 	 * removes all files from compile dir
+	 * @since 1.0.1
 	 */
 	public function clearCompileDir()
 	{
