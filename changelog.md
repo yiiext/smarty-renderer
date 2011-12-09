@@ -1,3 +1,9 @@
+1.0.2
+-----
+- Added ability to define pre- and postfilters in yii config (grigori)
+  Filters defined with a class-method array callback syntax are lazy-loaded by yii autoloader
+  for compilation only.
+
 1.0.1
 -----
 - Smarty 3.1 compatibility (Sam Dark, cebe)
