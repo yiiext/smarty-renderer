@@ -117,7 +117,7 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 		$this->smarty->_file_perms = $this->filePermission;
 		$this->smarty->_dir_perms = $this->directoryPermission;
 
-		$this->smarty->setTemplateDir(yii::app()->getViewPath());
+		$this->smarty->setTemplateDir(Yii::app()->getViewPath());
 		$compileDir = isset($this->config['compile_dir']) ?
 					  $this->config['compile_dir'] : Yii::app()->getRuntimePath().'/smarty/compiled/';
 
