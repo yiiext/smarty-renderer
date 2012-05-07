@@ -76,10 +76,23 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 	/**
 	 * @var Smarty smarty instance for rendering
 	 */
-	protected $smarty = null;
+	private $_smarty;
+
+	/**
+	 * @since 1.0.2
+	 * @return Smarty
+	 */
+	public function getSmarty()
+	{
+		if ($this->_smarty === null) {
+			$this->_smarty = new Smarty();
+		}
+	    return $this->_smarty;
+	}
 
 	/**
 	 * Component initialization
+	 * @throws CException
 	 */
 	public function init(){
 
@@ -104,20 +117,18 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 		spl_autoload_unregister('smartyAutoload');
 		Yii::registerAutoloader('smartyAutoload');
 
-		$this->smarty = new Smarty();
-
 		// configure smarty
 		if (is_array($this->config)) {
 			foreach ($this->config as $key => $value) {
 				if ($key{0} != '_') { // not setting semi-private properties
-					$this->smarty->$key = $value;
+					$this->getSmarty()->$key = $value;
 				}
 			}
 		}
-		$this->smarty->_file_perms = $this->filePermission;
-		$this->smarty->_dir_perms = $this->directoryPermission;
+		$this->getSmarty()->_file_perms = $this->filePermission;
+		$this->getSmarty()->_dir_perms = $this->directoryPermission;
 
-		$this->smarty->setTemplateDir(Yii::app()->getViewPath());
+		$this->getSmarty()->setTemplateDir(Yii::app()->getViewPath());
 		$compileDir = isset($this->config['compile_dir']) ?
 					  $this->config['compile_dir'] : Yii::app()->getRuntimePath().'/smarty/compiled/';
 
@@ -125,13 +136,13 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 		if(!file_exists($compileDir)){
 			mkdir($compileDir, $this->directoryPermission, true);
 		}
-		$this->smarty->setCompileDir($compileDir); // no check for trailing /, smarty does this for us
+		$this->getSmarty()->setCompileDir($compileDir); // no check for trailing /, smarty does this for us
 
 
-		$this->smarty->addPluginsDir(Yii::getPathOfAlias('ext.smarty.plugins'));
+		$this->getSmarty()->addPluginsDir(Yii::getPathOfAlias('ext.smarty.plugins'));
 		if(!empty($this->pluginsDir)){
 		    $plugin_path = Yii::getPathOfAlias($this->pluginsDir);
-			$this->smarty->addPluginsDir($plugin_path);
+			$this->getSmarty()->addPluginsDir($plugin_path);
 		}
 
 		if ($this->prefilters){
@@ -139,28 +150,20 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 			    $this->registerFilter('pre',$filter);
 			}
 		}
-		
+
 		if ($this->postfilters){
 			foreach ($this->postfilters as $filter) {
 			    $this->registerFilter('post',$filter);
 			}
 		}
 		if(!empty($this->configDir)){
-			$this->smarty->addConfigDir(Yii::getPathOfAlias($this->configDir));
+			$this->getSmarty()->addConfigDir(Yii::getPathOfAlias($this->configDir));
 		}
 	}
-	
-	/**
-	 * @since 1.0.2
-	 * @return Smarty
-	 */
-	public function getSmarty(){
-	    return $this->smarty;
-	}
-	
+
 	/**
 	 * Add a pre or post filter defined in yii config
-	 * 
+	 *
 	 * @since 1.0.2
 	 * @param const $type
 	 * @param callback $filter
@@ -178,21 +181,22 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 			    }
 		    }
 	    }
-	    $this->smarty->registerFilter($type, $filter);
+	    $this->getSmarty()->registerFilter($type, $filter);
 	}
 
 	/**
 	 * Renders a view file.
-	 * 
+	 *
 	 * This method is required by {@link IViewRenderer}.
-	 * 
+	 *
 	 * @param CBaseController the controller or widget who is rendering the view file.
 	 * @param string the view file path
 	 * @param mixed the data to be passed to the view
 	 * @param boolean whether the rendering result should be returned
 	 * @return mixed the rendering result, or null if the rendering result is not needed.
 	 */
-	public function renderFile($context,$sourceFile,$data,$return) {
+	public function renderFile($context,$sourceFile,$data,$return)
+	{
 		// current controller properties will be accessible as {$this->property}
 		$data['this'] = $context;
 		// Yii::app()->... is available as {Yii->...} (deprecated, use {Yii::app()->...} instead, Smarty3 supports this.)
@@ -205,9 +209,9 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 		if(!is_file($sourceFile) || ($file=realpath($sourceFile))===false)
 			throw new CException(Yii::t('yiiext','View file "{file}" does not exist.', array('{file}'=>$sourceFile)));
 
-		$template = $this->smarty->createTemplate($sourceFile, null, null, $data, true);
+		$template = $this->getSmarty()->createTemplate($sourceFile, null, null, $data, true);
 		/* @var $template Smarty_Internal_Template */
-		
+
 		//render or return
 		if($return)
 			return $template->fetch();
@@ -221,6 +225,6 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 	 */
 	public function clearCompileDir()
 	{
-		$this->smarty->clearCompiledTemplate();
+		$this->getSmarty()->clearCompiledTemplate();
 	}
 }
