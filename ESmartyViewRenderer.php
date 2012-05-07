@@ -165,8 +165,9 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 	 * Add a pre or post filter defined in yii config
 	 *
 	 * @since 1.0.2
-	 * @param const $type
+	 * @param string $type
 	 * @param callback $filter
+	 * @throws CException
 	 */
 	public function registerFilter($type,$filter){
 	    if (is_string($filter)){
@@ -189,11 +190,12 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 	 *
 	 * This method is required by {@link IViewRenderer}.
 	 *
-	 * @param CBaseController the controller or widget who is rendering the view file.
-	 * @param string the view file path
-	 * @param mixed the data to be passed to the view
-	 * @param boolean whether the rendering result should be returned
+	 * @param CBaseController $context the controller or widget who is rendering the view file.
+	 * @param string $sourceFile the view file path
+	 * @param mixed $data the data to be passed to the view
+	 * @param boolean $return whether the rendering result should be returned
 	 * @return mixed the rendering result, or null if the rendering result is not needed.
+	 * @throws CException
 	 */
 	public function renderFile($context,$sourceFile,$data,$return)
 	{
@@ -209,10 +211,10 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 		if(!is_file($sourceFile) || ($file=realpath($sourceFile))===false)
 			throw new CException(Yii::t('yiiext','View file "{file}" does not exist.', array('{file}'=>$sourceFile)));
 
+		/** @var Smarty_Internal_Template $template */
 		$template = $this->getSmarty()->createTemplate($sourceFile, null, null, $data, true);
-		/* @var $template Smarty_Internal_Template */
 
-		//render or return
+		// render or return
 		if($return)
 			return $template->fetch();
 		else
