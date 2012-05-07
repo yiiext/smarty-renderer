@@ -1,3 +1,8 @@
+1.0.3
+-----
+- bug #10 getter getSmarty() conflicts with property $smarty (cebe)
+- reverted BC break introduced in 1.0.2 filename change from `Smarty` to `smarty` broke applications on non case sensitive systems (cebe)
+
 1.0.2
 -----
 - Added ability to define pre- and postfilters in yii config (grigori)
