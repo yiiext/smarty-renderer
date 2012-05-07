@@ -18,8 +18,9 @@ This extension allows you to use [Smarty](http://www.smarty.net/) version 3 temp
 * [Download](http://www.smarty.net/download.php) and extract `libs` folder contents of Smarty package under `protected/vendors/Smarty`.
 * Add the following to your config file 'components' section:
 
-~~~
-[php]
+~~~php
+<?php
+// ...
 'viewRenderer'=>array(
   'class'=>'application.extensions.yiiext.renderers.smarty.ESmartyViewRenderer',
     'fileExtension' => '.tpl',
@@ -37,6 +38,6 @@ There are some more options on configuring Smarty properties now. Will add docum
 
 ###Usage
 * [Smarty documentation](http://www.smarty.net/docs.php).
-* Current controller properties are accessible via {$this->pageTitle}.
-* Yii properties are available as follows: {$Yii->theme->baseUrl}.
-* Used memory is stored in {$MEMORY}, used time is in {$TIME}.
+* Current controller properties are accessible via `{$this->pageTitle}`.
+* Yii properties are available as follows: `{Yii::app()->theme->baseUrl}`.
+* Used memory is stored in `{$MEMORY}`, used time is in `{$TIME}`.
