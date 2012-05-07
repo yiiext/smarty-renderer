@@ -31,35 +31,35 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 
 	/**
 	 * @var null|string yii alias of the directory where your smarty plugins are located
-	 * application.extensions.Smarty.plugins is always added
+	 * ext.Smarty.plugins is always added
 	 */
-	public $pluginsDir = null;
+	public $pluginsDir;
 
 	/**
 	 * @var array A list of the prefilters to be attached
 	 * @since 1.0.2
-	 * 
+	 *
 	 * Elements are the callback identifiers (see call_user_func()).
-	 * 
+	 *
 	 * If the filter is defined as a string, and the function is not defined,
 	 * the file prefilter.[filtername].php is loaded with include()
-	 * 
+	 *
  	 * Callbacks defined as arrays, e.g. array('prefilterClass','foo')
-	 * will utilize yii autoload routine to load filters for compilation only 
+	 * will utilize yii autoload routine to load filters for compilation only
 	 */
 	public $prefilters = array();
-	
+
 	/**
 	 * @var array List of postfilters to be registered
-	 * @see $prefilters, replace 'prefilter' with 'postfilter' 
+	 * @see $prefilters, replace 'prefilter' with 'postfilter'
 	 * @since 1.0.2
 	 */
 	public $postfilters = array();
-	
+
 	/**
 	 * @var null|string yii alias of the directory where your smarty template-configs are located
 	 */
-	public $configDir = null;
+	public $configDir;
 
 	/**
 	 * @var array smarty configuration values
