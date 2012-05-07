@@ -18,8 +18,10 @@
 * [Скачать](http://www.smarty.net/download.php) и распаковать содержимое директории
   `libs` в `protected/vendors/Smarty`.
 * Добавить в конфигурацю в секцию 'components':
-~~~
-[php]
+
+~~~php
+<?php
+// ...
 'viewRenderer'=>array(
   'class'=>'application.extensions.yiiext.renderers.smarty.ESmartyViewRenderer',
     'fileExtension' => '.tpl',
@@ -36,6 +38,6 @@ There are some more options on configuring Smarty properties now. Will add docum
 
 ###Использование
 * [Документация Smarty](http://www.smarty.net/docs.php).
-* Свойства текущего контроллера доступны как {$this->pageTitle}.
-* Свойства Yii доступны как {$Yii->theme->baseUrl}.
-* Использованную память можно вывести как {$MEMORY}, затраченное время как {$TIME}.
+* Свойства текущего контроллера доступны как `{$this->pageTitle}`.
+* Свойства Yii доступны как `{Yii::app()->theme->baseUrl}`.
+* Использованную память можно вывести как `{$MEMORY}`, затраченное время как `{$TIME}`.
