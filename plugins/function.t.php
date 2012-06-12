@@ -24,5 +24,5 @@ function smarty_function_t($params, &$smarty) {
     $language = !empty($params['lang']) ? $params['lang'] : null;
     $par = !empty($params['params']) ? $params['params'] : array();
 
-    return Yii::t($category, $text, $params, $source, $language);
+    return Yii::t($category, $text, $par, $source, $language);
 }
