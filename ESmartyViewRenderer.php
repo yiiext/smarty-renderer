@@ -181,13 +181,13 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 
 		if ($this->functions){
 			foreach ($this->functions as $name => $plugin) {
-			    $this->registerPlugin('function',$name,$plugin);
+			    $this->getSmarty()->registerPlugin('function',$name,$plugin);
 			}
 		}
 
 		if ($this->modifiers){
 			foreach ($this->modifiers as $name => $plugin) {
-			    $this->registerPlugin('modifier',$name,$plugin);
+			    $this->getSmarty()->registerPlugin('modifier',$name,$plugin);
 			}
 		}
 
