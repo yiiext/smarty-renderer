@@ -8,7 +8,7 @@
  * @link http://yiiext.github.com/extensions/smarty-renderer/index.html
  * @link http://www.smarty.net/
  *
- * @version 1.0.3
+ * @version 1.0.4
  */
 class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 {
@@ -61,6 +61,21 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 	 * @since 1.0.2
 	 */
 	public $postfilters = array();
+
+	/**
+	 * @var array A list of the functions to be registered
+	 * @since 1.0.4
+	 *
+	 * Element keys are the function names, values are the callback identifiers (see call_user_func()).
+	 */
+	public $functions = array();
+
+	/**
+	 * @var array List of modifiers to be registered
+	 * @see $functions, replace 'function' with 'modifier'
+	 * @since 1.0.4
+	 */
+	public $modifiers = array();
 
 	/**
 	 * @var null|string yii alias of the directory where your smarty template-configs are located
@@ -163,6 +178,19 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 			    $this->registerFilter('post',$filter);
 			}
 		}
+
+		if ($this->functions){
+			foreach ($this->functions as $name => $plugin) {
+			    $this->registerPlugin('function',$name,$plugin);
+			}
+		}
+
+		if ($this->modifiers){
+			foreach ($this->modifiers as $name => $plugin) {
+			    $this->registerPlugin('modifier',$name,$plugin);
+			}
+		}
+
 		if(!empty($this->configDir)){
 			$this->getSmarty()->addConfigDir(Yii::getPathOfAlias($this->configDir));
 		}
