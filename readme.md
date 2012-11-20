@@ -47,12 +47,13 @@ There are some more options on configuring Smarty properties now. Will add docum
 * You can use Yii widgets like this: 
 ~~~
   {widget name="path.to.widget.Class"} {*render widget without params*}
-  
-  {widget name="Breadcrumbs" links=['Library'=>'#', 'Data'] someParam="someValue"} {*You can set params by passing it in the widget-function*}
+
+  {*You can set params by passing it in the widget-function*}
+  {widget name="Breadcrumbs" links=['Library'=>'#', 'Data'] someParam="someValue"}
   
   {*Also you can use another widget syntax:*}
   {begin_widget name="bootstrap.widgets.TbModal" id='anotherModalDialog' options=[backdrop=>static] otherParam="value" [...]}
-		{*Widget object are accessible via {$widget} variable inside the block*}
+	{*Widget object are accessible via {$widget} variable inside the block*}
         {$widget->some_widget_method_or_variable} 
   {/begin_widget} 
 ~~~
@@ -76,8 +77,9 @@ Syntax:
 
 * Allows to generate links using CHtml::link().
  Syntax:
- * Syntax:
- * {link text="test"}
- * {link text="test" url="controller/action?param=value"}
- * {link text="test" url="/absolute/url"}
- * {link text="test" url="http://host/absolute/url"}
+~~~
+  {link text="test"}
+  {link text="test" url="controller/action?param=value"}
+  {link text="test" url="/absolute/url"}
+  {link text="test" url="http://host/absolute/url"}
+~~~
