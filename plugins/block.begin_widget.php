@@ -5,9 +5,9 @@
  * There is a variable inside a block wich has 'widget' name and represent widget object
  * 
  * Example:
- *  {widget name="activeForm" params=[...]}
+ *  {begin_widget name="activeForm" foo="" bar="" otherParam="" [...]}
  *      {$widget->some_method_or_variable}
- *  {/form} 
+ *  {/begin_widget} 
  *
  * @param array                    $params   parameters
  * @param string                   $content  contents of the block

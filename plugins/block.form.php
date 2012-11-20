@@ -8,7 +8,7 @@ require_once 'block.begin_widget.php';
  * There is a variable inside a block with name equalent a form name that represents Form object.
  * 
  * Example:
- *  {form name="product_form" params=[...]}
+ *  {form name="product_form" param1="value1" param2="value2" [...]}
  *      {$product_form->some_method_or_variable}
  *  {/form} 
  * 
@@ -22,12 +22,11 @@ require_once 'block.begin_widget.php';
 function smarty_block_form($params, $content, $template, &$repeat) {
     $formName = $params['name'];
     
-    $params['name'] = 'bootstrap.widgets.TbActiveForm';
+    $params['name'] = 'CActiveForm';
     smarty_block_begin_widget($params, $content, $template, $repeat);
     
     if ($repeat) { //assign variable only on open tag
         $template->assign($formName, $template->getVariable('widget')->value);
-        //var_dump($template->getVariable('widget')->value);
     }  else {
        $template->clearAssign($formName);
     }

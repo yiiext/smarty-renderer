@@ -4,7 +4,7 @@
  *
  * Syntax:
  * {widget name="path.to.widget.Class"}
- * {widget name="bootstrap.widgets.TbBreadcrumbs" params=['links'=>['Library'=>'#', 'Data']]}
+ * {widget name="bootstrap.widgets.TbBreadcrumbs" links=['Library'=>'#', 'Data']}
  *
  * @see CBaseController::widget().
  * 
