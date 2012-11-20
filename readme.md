@@ -52,9 +52,10 @@ There are some more options on configuring Smarty properties now. Will add docum
 	{*You can set params by passing it in the widget-function*}
 	{widget name="Breadcrumbs" links=['Library'=>'#', 'Data'] someParam="someValue"}
   
- 	{*Another syntax. 
- 	Widget object are accessible via {$widget} variable inside the block *}
+ 	{*Another syntax. *}
+ 
 	{begin_widget name="bootstrap.widgets.TbModal" id='anotherModalDialog' options=[backdrop=>static] otherParam="value" [...]}
+        	{*Widget object are accessible via {$widget} variable inside the block *}
         	{$widget->some_widget_method_or_variable} 
   	{/begin_widget} 
 ~~~
