@@ -1,6 +1,6 @@
 1.0.5
 -----
-- Added Yii Aliases support in Smarty Templates (in `{iclude}` and `{extends}` functions)
+- Added Yii Aliases support in Smarty Templates (in `{iclude}` and `{extends}` functions) (thekip)
 
 1.0.4
 -----
