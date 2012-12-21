@@ -8,7 +8,7 @@
  * @link http://yiiext.github.com/extensions/smarty-renderer/index.html
  * @link http://www.smarty.net/
  *
- * @version 1.0.4
+ * @version 1.0.5
  */
 class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 {
@@ -160,7 +160,11 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 		}
 		$this->getSmarty()->setCompileDir($compileDir); // no check for trailing /, smarty does this for us
 
-
+		//Register default template handler. This allow us to use yii aliases in the smarty templates.
+		//You shoud set path without extension
+		//for example {include file="application.views.layout.main"}
+		$this->getSmarty()->default_template_handler_func = create_function('$type, $name', 'return Yii::getPathOfAlias($name) . "' . $this->fileExtension .'";'); 
+ 
 		$this->getSmarty()->addPluginsDir(Yii::getPathOfAlias('ext.Smarty.plugins'));
 		if(!empty($this->pluginsDir)){
 		    $plugin_path = Yii::getPathOfAlias($this->pluginsDir);

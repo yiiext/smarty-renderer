@@ -31,6 +31,13 @@ function smarty_block_begin_widget($params, $content, $template, &$repeat) {
         
         $widgetName = $params['name'];
         unset($params['name']);
+		
+		//some widgets has 'name' as property. You can pass it by '_name' parameter
+        if (isset($params['_name'])) {
+            $params['name'] = $params['_name'];
+            unset($params['_name']);
+        }
+		
         $template->assign('widget', $controller_object->beginWidget($widgetName, $params, false));
     } else { //tag closed
        echo $content;
