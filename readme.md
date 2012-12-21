@@ -43,7 +43,6 @@ There are some more options on configuring Smarty properties now. Will add docum
 ~~~ smarty
 	You have to set path without extension
 	{extends file="application.views.layout.main"} 
-	or
 	{include file="application.views.controller._form"}
 	
 	Also you can use regular Smarty syntax for file path wich relative to current `views` directory:
