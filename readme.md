@@ -1,23 +1,23 @@
-Шаблонизатор Smarty для Yii
-===========================
+Smarty view renderer
+====================
 
-Данное расширение позволяет использовать [Smarty](http://www.smarty.net/) версии 3 в приложениях Yii.
+This extension allows you to use [Smarty](http://www.smarty.net/) version 3 templates in Yii.
 
-###Полезные ссылки
+###Resources
 * [Github](https://github.com/yiiext/smarty-renderer)
 * [Smarty](http://www.smarty.net/)
-* [Обсуждение](http://yiiframework.ru/forum/viewtopic.php?f=9&t=241)
-* [Сообщить об ошибке](https://github.com/yiiext/smarty-renderer/issues)
+* [Discuss](http://www.yiiframework.com/forum/index.php?/topic/4925-smarty-view-renderer/)
+* [Report a bug](https://github.com/yiiext/smarty-renderer/issues)
 
-###Требования
-* Yii 1.0 и выше
-* Smarty 3.0.6 и выше
+###Requirements
+* Yii 1.0 or above
+* Smarty 3.0.6 or above
 
-###Установка
-* Распаковать в `protected/extensions`.
-* [Скачать](http://www.smarty.net/download.php) и распаковать содержимое директории
-  `libs` в `protected/vendors/Smarty`.
-* Добавить в конфигурацю в секцию 'components':
+###Installation
+* Extract the release file under `protected/extensions`.
+* [Download](http://www.smarty.net/download.php) and extract `libs` folder contents of Smarty package under `protected/vendors/Smarty`.
+* Move files from `plugins` folder to `protected/vendors/Smarty/plugins`.
+* Add the following to your config file 'components' section:
 
 ~~~php
 <?php
@@ -32,62 +32,59 @@
     //'config'=>array(
     //    'force_compile' => YII_DEBUG,
     //   ... any Smarty object parameter
+    //)
 ),
 ~~~
 There are some more options on configuring Smarty properties now. Will add documentation soon.
 
-###Использование
-* [Документация Smarty](http://www.smarty.net/docs.php).
-* Свойства текущего контроллера доступны как `{$this->pageTitle}`.
-* Для подключения других отображений внутри шаблона Smarty можно использовать Yii алиасы. Пример: 
+###Usage
+* [Smarty documentation](http://www.smarty.net/docs.php).
+* You can use Yii aliases for including files inside the template. For example: 
 ~~~ smarty
-  Алиас необходимо указывать БЕЗ расширения
+	You have to set path without extension
 	{extends file="application.views.layout.main"} 
 	{include file="application.views.controller._form"}
 	
-  Так же можно использовать обычный способ подключения файлов,
-  При таком способе путь строится относительно текущей папки c шаблонами (по умолчанию protected/views)
-	{extends file="layout/main.tpl"}
+	Also you can use regular Smarty syntax for file path wich relative to current `views` directory:
 	{include file="controller/_form.tpl"}
 ~~~
-Алиасы очень удобны если в вашем приложении используются модульный подоход и 
-вам во вложенном модуле нужно подключить отображения из родительского приложения или модуля.
-
-* Свойства Yii доступны как `{Yii::app()->theme->baseUrl}`.
-* Использованную память можно вывести как `{$MEMORY}`, затраченное время как `{$TIME}`.
+* Current controller properties are accessible via `{$this->pageTitle}`.
+* Yii properties are available as follows: `{Yii::app()->theme->baseUrl}`.
+* Used memory is stored in `{$MEMORY}`, used time is in `{$TIME}`.
 
 ###Smarty Plugins
-В комплекте с расширением поставляется несколько Smarty - плагинов, позволяющих более удобно использовать связку Yii + Smarty.
-* Функция `widget` и блок `begin_widget` используются что бы подключать  Yii виджеты в шаблоне: 
+* `widget` and `begin_widget` plugins allow use Yii widgets in this way: 
 ~~~ smarty
-	{*Свойства виджета можно задавать, передавая их как паараметры функции*}
+	{*Render widget without params*}
+	{widget name="path.to.widget.Class"} 
+
+	{*You can set params by passing it in the widget-function*}
 	{widget name="Breadcrumbs" links=['Library'=>'#', 'Data'] someParam="someValue"}
-  {widget name="path.to.widget.Class"} {*виджет без параметров*}
   
- 	{*Для подключения виджета использующего beginWidget() и endWidget(), необходимо использовать блок {begin_widget}. 
-   Параметры передаются точно так же как и в функции. *}
+ 	{*Another syntax. *}
 	{begin_widget name="bootstrap.widgets.TbModal" id='anotherModalDialog' options=[backdrop=>static] otherParam="value" [...]}
-        	{*Внутри блока доступна переменная {$widget} в которой находится объект текущего виджета.*}
+        	{*Widget object are accessible via {$widget} variable inside the block *}
         	{$widget->some_widget_method_or_variable} 
-  {/begin_widget} 
+  	{/begin_widget} 
 ~~~
 
-* `Form` плагин. Это синтаксический сахар над begin_widget, который позволяет использовать Yii ActiveForm без написания лишнего кода:
+* Form plugin is a syntax-sugar plugin for Yii ActiveForm. Syntax:
 ~~~ smarty
    {form name="product_form" id='form' type='horizontal' otherParam="value" [...]}
-		    {*Объект формы доступен внутри блока через переменную имя которой такое же как имя формы*}
+		{*Form object are accessible via variable with name equal to form name*}
         {$product_form->textFieldRow($this->model, 'name', ['class'=>'span5','maxlength'=>255])}
    {/form} 
 ~~~
 
-* Функция `t()` позволяет переводить строки, используя  Yii::t(). Синтаксис:
+* `t()` function allows to translate strings using Yii::t(). Syntax:
 ~~~ smarty
   {t text="text to translate" cat="app"}
   {t text="text to translate" cat="app" src="en" lang="ru"}
   {t text="text to translate" cat="app" params=$params}
 ~~~
 
-* Функция `link` позволяет генерировать ссылки используя CHtml::link(). Синтаксис:
+* `link` function allows to generate links using CHtml::link().
+ Syntax:
 ~~~ smarty
   {link text="test"}
   {link text="test" url="controller/action?param=value"}
