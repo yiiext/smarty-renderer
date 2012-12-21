@@ -1,3 +1,11 @@
+1.0.5
+-----
+- Added Yii Aliases support in Smarty Templates (in `{iclude}` and `{extends}` functions) (thekip)
+
+1.0.4
+-----
+- Added ability to define functions and modifiers in yii config (ErikMinekus)
+
 1.0.3
 -----
 - bug #10 getter getSmarty() conflicts with property $smarty (cebe)

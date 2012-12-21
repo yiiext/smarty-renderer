@@ -39,6 +39,15 @@ There are some more options on configuring Smarty properties now. Will add docum
 
 ###Usage
 * [Smarty documentation](http://www.smarty.net/docs.php).
+* You can use Yii aliases for including files inside the template. For example: 
+~~~ smarty
+	You have to set path without extension
+	{extends file="application.views.layout.main"} 
+	{include file="application.views.controller._form"}
+	
+	Also you can use regular Smarty syntax for file path wich relative to current `views` directory:
+	{include file="controller/_form.tpl"}
+~~~
 * Current controller properties are accessible via `{$this->pageTitle}`.
 * Yii properties are available as follows: `{Yii::app()->theme->baseUrl}`.
 * Used memory is stored in `{$MEMORY}`, used time is in `{$TIME}`.

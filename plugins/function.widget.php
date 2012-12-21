@@ -25,5 +25,11 @@ function smarty_function_widget($params, &$smarty){
      $widgetName = $params['name'];
     unset($params['name']);
 
+    //some widgets has 'name' property. You can pass it by '_name' parameter
+    if (isset($params['_name'])) {
+        $params['name'] = $params['_name'];
+        unset($params['_name']);
+    }
+    
     return $controller_object->widget($widgetName, $params, true);
 }
