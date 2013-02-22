@@ -129,6 +129,9 @@ EOD;
 
                 if(preg_match($regexp_cat, $value, $match)){
                     $cat = $match[1];
+                    if (($pos = strpos($cat, '.')) !== false) {
+                        $cat = substr($cat, $pos + 1);
+                    }
                 }
                 if(preg_match($regexp_text, $value, $match)){
                     $text = $match[2];
