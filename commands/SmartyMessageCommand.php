@@ -101,7 +101,6 @@ EOD;
 
             $messages = array_merge_recursive($messages, $extractMessages);
         }
-
         foreach ($languages as $language) {
             $dir = $messagePath . DIRECTORY_SEPARATOR . $language;
             if (!is_dir($dir))
@@ -118,25 +117,24 @@ EOD;
         echo "Extracting messages from $fileName...\n";
         $subject = file_get_contents($fileName);
         $messages = array();
-        $matches = array();
 
-        if (preg_match_all('~\{t\s*.*?\}~s', $subject, $allMatches, PREG_SET_ORDER)) {
-            foreach ($allMatches AS $match) {
-                $category = '';
+        $regexp_tag = '~\{t(\s*[\w]+=((\'|")+(.*?(?<!\\))\3)|\$[\w]+|\[[^\]]*\]))*\s*\}~s';
+        $regexp_cat = '~cat=[\'"]+(.*?)[\'"]+(?=\}+|\s+)~si';
+        $regexp_text = '~text=(\'|")+(.*?(?<!\\\))\1(?=\}+|\s+)~si';
+
+        if (preg_match_all($regexp_tag, $subject, $match)) {
+            foreach($match[0] AS $value){
+                $cat = '';
                 $text = '';
-                $match = $match[0];
 
-                if (preg_match('~cat=[\'"]+(.*?)[\'"]+(\s|\})~si', $match, $m)) {
-                    $category = $m[1];
-                    if (($pos = strpos($category, '.')) !== false) {
-                        $category = substr($category, $pos + 1);
-                    }
+                if(preg_match($regexp_cat, $value, $match)){
+                    $cat = $match[1];
                 }
-                if (preg_match('~text=[\'"]+(.*?)[\'"]+(\s|\})~si', $match, $m)) {
-                    $text = $m[1];
+                if(preg_match($regexp_text, $value, $match)){
+                    $text = $match[2];
                 }
-                if ($text && $category) {
-                    $messages[$category][] = $text;
+                if($cat && $text){
+                    $messages[$cat][] = $text;
                 }
             }
         }
