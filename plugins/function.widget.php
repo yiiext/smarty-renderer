@@ -51,15 +51,6 @@ function smarty_function_widget($params, Smarty_Internal_Template &$smarty)
         throw new CException("className, name or c parameter should be specified.");
     }
 
-<<<<<<< HEAD
-    //some widgets has 'name' property. You can pass it by '_name' parameter
-    if (isset($params['_name'])) {
-        $params['name'] = $params['_name'];
-        unset($params['_name']);
-    }
-    
-    return $controller_object->widget($widgetName, $params, true);
-=======
     // transfer params to variables with default values
     $className = $params['className'];
     $properties = empty($params['properties']) ? array() : $params['properties'];
@@ -88,5 +79,4 @@ function smarty_function_widget($params, Smarty_Internal_Template &$smarty)
     else {
         return $output;
     }
->>>>>>> Yii syntax in widget and begin_widget
 }

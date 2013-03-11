@@ -52,24 +52,6 @@ function smarty_block_begin_widget($params, $content, $template, &$repeat)
         if (!isset($params['className'])) {
             throw new CException("className, name or c parameter should be specified.");
         }
-<<<<<<< HEAD
-        
-        $widgetName = $params['name'];
-        unset($params['name']);
-		
-		//some widgets has 'name' as property. You can pass it by '_name' parameter
-        if (isset($params['_name'])) {
-            $params['name'] = $params['_name'];
-            unset($params['_name']);
-        }
-		
-        $template->assign('widget', $controller_object->beginWidget($widgetName, $params, false));
-    } else { //tag closed
-       echo $content;
-       
-       $controller_object->endWidget(); 
-       $template->clearAssign('widget');
-=======
 
         // transfer params to variables with default values
         $className = $params['className'];
@@ -98,6 +80,5 @@ function smarty_block_begin_widget($params, $content, $template, &$repeat)
 
         $controller->endWidget();
         $template->clearAssign('widget');
->>>>>>> Yii syntax in widget and begin_widget
     }
 }
