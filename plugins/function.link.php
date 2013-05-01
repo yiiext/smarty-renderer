@@ -28,8 +28,8 @@ function smarty_function_link($params, &$smarty){
         if(!isset($parts['host']) && $parts['path'][1]!='/'){
             $par = array();
             parse_str($parts['query'], $par);
-            $url = array(
-                $parts['path'],
+            $url = array_merge(
+                array($parts['path']),
                 $par
             );
         }
