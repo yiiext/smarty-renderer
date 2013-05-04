@@ -31,6 +31,7 @@ This extension allows you to use [Smarty](http://www.smarty.net/) version 3 temp
     //'postfilters' => array(),
     //'config'=>array(
     //    'force_compile' => YII_DEBUG,
+    //	  'debugging'	  => false,
     //   ... any Smarty object parameter
     //)
 ),
@@ -51,6 +52,7 @@ There are some more options on configuring Smarty properties now. Will add docum
 * Current controller properties are accessible via `{$this->pageTitle}`.
 * Yii properties are available as follows: `{Yii::app()->theme->baseUrl}`.
 * Used memory is stored in `{$MEMORY}`, used time is in `{$TIME}`.
+* In controllers: $this->renderFile('path/from/views/to/template.tpl', array('var1' => 'value1'));
 
 ###Smarty Plugins
 * `widget` and `begin_widget` plugins allow use Yii widgets in this way: 

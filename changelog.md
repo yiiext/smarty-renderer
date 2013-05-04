@@ -1,3 +1,7 @@
+1.0.6
+-----
+- Fix Smarty debugging option
+
 1.0.5
 -----
 - Added Yii Aliases support in Smarty Templates (in `{include}` and `{extends}` functions) (thekip)
