@@ -247,7 +247,7 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 		$data['MEMORY'] = round(Yii::getLogger()->getMemoryUsage()/(1024*1024),2).' MB';
 
 		// check if view file exists
-		if(!is_file($sourceFile) || ($file=realpath($sourceFile))===false)
+		if(!$this->smarty->templateExists($sourceFile))
 			throw new CException(Yii::t('yiiext','View file "{file}" does not exist.', array('{file}'=>$sourceFile)));
 
 		/** @var Smarty_Internal_Template $template */
