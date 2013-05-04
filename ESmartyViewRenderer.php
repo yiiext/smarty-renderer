@@ -268,4 +268,5 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 	{
 		$this->getSmarty()->clearCompiledTemplate();
 	}
+	
 }
