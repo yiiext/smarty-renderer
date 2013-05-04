@@ -7,6 +7,7 @@
  * {link text="test" url="controller/action?param=value"}
  * {link text="test" url="/absolute/url"}
  * {link text="test" url="http://host/absolute/url"}
+ * {link text="test" url=['action', 'id'=>$someid]}
  *
  * @see CHtml::link().
  *
@@ -24,18 +25,23 @@ function smarty_function_link($params, &$smarty){
     $url = '';
 
     if(!empty($params['url'])){
-        $parts = parse_url($params['url']);
-        if(!isset($parts['host']) && $parts['path'][1]!='/'){
-            $par = array();
-            parse_str($parts['query'], $par);
-            $url = array_merge(
-                array($parts['path']),
-                $par
-            );
+        if (is_array($params['url'])) {
+            $url = $params['url'];
         }
         else {
-            $url = $params['url'];
-        }        
+            $parts = parse_url($params['url']);
+            if(!isset($parts['host']) && $parts['path'][1]!='/'){
+                $par = array();
+                parse_str($parts['query'], $par);
+                $url = array_merge(
+                    array($parts['path']),
+                    $par
+                );
+            }
+            else {
+                $url = $params['url'];
+            }
+        }
     }     
      
     return CHtml::link($text, $url, $options);
