@@ -165,10 +165,28 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 		//for example {include file="application.views.layout.main"}
 		$this->getSmarty()->default_template_handler_func = create_function('$type, $name', 'return Yii::getPathOfAlias($name) . "' . $this->fileExtension .'";'); 
  
-		$this->getSmarty()->addPluginsDir(Yii::getPathOfAlias($this->smartyDir.'.plugins'));
+        // add the plugins directory that comes with smarty.
+		$this->getSmarty()->addPluginsDir(
+            Yii::getPathOfAlias($this->smartyDir.'.plugins')
+        );
+        // add the plugins dir that comes with the yii smarty extension
+		$this->getSmarty()->addPluginsDir(
+            dirname(__FILE__).DIRECTORY_SEPARATOR.'plugins'
+        );
 		if(!empty($this->pluginsDir)){
-		    $plugin_path = Yii::getPathOfAlias($this->pluginsDir);
-			$this->getSmarty()->addPluginsDir($plugin_path);
+            // they may have a whack of plugin directories they want to add
+            //  to smarty in an array
+            if(is_array($this->pluginsDir)) {
+                foreach($this->pluginsDir as $pluginsDir) {
+                    $plugin_path = Yii::getPathOfAlias($pluginsDir);
+                    $this->getSmarty()->addPluginsDir($plugin_path);
+                }
+            }
+            else {
+                // i.e., they just want to add one plugins directory
+                $plugin_path = Yii::getPathOfAlias($this->pluginsDir);
+                $this->getSmarty()->addPluginsDir($plugin_path);
+            }
 		}
 
 		if ($this->prefilters){
