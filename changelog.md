@@ -1,3 +1,8 @@
+1.0.6
+-----
+
+- Changed default `smartyDir` value to `application.vendor.Smarty` to match Yii application template (samdark)
+
 1.0.5
 -----
 - Added Yii Aliases support in Smarty Templates (in `{include}` and `{extends}` functions) (thekip)

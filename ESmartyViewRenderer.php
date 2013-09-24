@@ -8,7 +8,7 @@
  * @link http://yiiext.github.com/extensions/smarty-renderer/index.html
  * @link http://www.smarty.net/
  *
- * @version 1.0.5
+ * @version 1.0.6
  */
 class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 {
@@ -39,7 +39,7 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 	 * @var string path alias of the directory where the Smarty.class.php file can be found.
 	 * Also plugins and sysplugins directory should be there.
 	 */
-	public $smartyDir = 'application.vendors.Smarty';
+	public $smartyDir = 'application.vendor.Smarty';
 
 	/**
 	 * @var array A list of the prefilters to be attached

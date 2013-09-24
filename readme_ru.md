@@ -16,7 +16,7 @@
 ###Установка
 * Распаковать в `protected/extensions`.
 * [Скачать](http://www.smarty.net/download.php) и распаковать содержимое директории
-  `libs` в `protected/vendors/Smarty`.
+  `libs` в `protected/vendor/Smarty`.
 * Добавить в конфигурацю в секцию 'components':
 
 ~~~php

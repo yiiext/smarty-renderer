@@ -15,8 +15,8 @@ This extension allows you to use [Smarty](http://www.smarty.net/) version 3 temp
 
 ###Installation
 * Extract the release file under `protected/extensions`.
-* [Download](http://www.smarty.net/download.php) and extract `libs` folder contents of Smarty package under `protected/vendors/Smarty`.
-* Move files from `plugins` folder to `protected/vendors/Smarty/plugins`.
+* [Download](http://www.smarty.net/download.php) and extract `libs` folder contents of Smarty package under `protected/vendor/Smarty`.
+* Move files from `plugins` folder to `protected/vendor/Smarty/plugins`.
 * Add the following to your config file 'components' section:
 
 ~~~php
