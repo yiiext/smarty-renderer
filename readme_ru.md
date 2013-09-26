@@ -14,7 +14,7 @@
 * Smarty 3.0.6 и выше
 
 ###Установка
-* Распаковать в `protected/extensions`.
+* Распаковать в `vendor/Smarty`.
 * [Скачать](http://www.smarty.net/download.php) и распаковать содержимое директории
   `libs` в `protected/vendor/Smarty`.
 * Добавить в конфигурацю в секцию 'components':
