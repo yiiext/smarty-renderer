@@ -30,7 +30,7 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 	public $filePermission=0644;
 
 	/**
-	 * @var null|string yii alias of the directory where your smarty plugins are located
+	 * @var null|string|array yii alias of the directory where your smarty plugins are located
 	 * ext.Smarty.plugins is always added
 	 */
 	public $pluginsDir;
@@ -166,9 +166,13 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 		$this->getSmarty()->default_template_handler_func = create_function('$type, $name', 'return Yii::getPathOfAlias($name) . "' . $this->fileExtension .'";'); 
  
 		$this->getSmarty()->addPluginsDir(Yii::getPathOfAlias($this->smartyDir.'.plugins'));
-		if(!empty($this->pluginsDir)){
-		    $plugin_path = Yii::getPathOfAlias($this->pluginsDir);
-			$this->getSmarty()->addPluginsDir($plugin_path);
+		if(!empty($this->pluginsDir){
+			if(!is_array($pluginsDir))
+                $pluginsDir = array($pluginsDir);
+            foreach($pluginsDir as $dir){
+				$plugin_path = Yii::getPathOfAlias(dir);
+				$this->getSmarty()->addPluginsDir($plugin_path);
+			}
 		}
 
 		if ($this->prefilters){
