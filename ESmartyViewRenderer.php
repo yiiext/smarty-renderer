@@ -108,7 +108,7 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 		if ($this->_smarty === null) {
 			$this->_smarty = new Smarty();
 		}
-	    return $this->_smarty;
+		return $this->_smarty;
 	}
 
 	/**
@@ -125,7 +125,7 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 		// need this to avoid Smarty rely on spl autoload function,
 		// this has to be done since we need the Yii autoload handler
 		if (!defined('SMARTY_SPL_AUTOLOAD')) {
-		    define('SMARTY_SPL_AUTOLOAD', 0);
+			define('SMARTY_SPL_AUTOLOAD', 0);
 		} elseif (SMARTY_SPL_AUTOLOAD !== 0) {
 			throw new CException('ESmartyViewRenderer cannot work with SMARTY_SPL_AUTOLOAD enabled. Set SMARTY_SPL_AUTOLOAD to 0.');
 		}
@@ -168,34 +168,34 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 		$this->getSmarty()->addPluginsDir(Yii::getPathOfAlias($this->smartyDir.'.plugins'));
 		if(!empty($this->pluginsDir)){
 			if(!is_array($pluginsDir))
-                $pluginsDir = array($pluginsDir);
-            foreach($pluginsDir as $dir){
-				$plugin_path = Yii::getPathOfAlias(dir);
+				$pluginsDir = array($pluginsDir);
+			foreach($pluginsDir as $dir){
+				$plugin_path = Yii::getPathOfAlias($dir);
 				$this->getSmarty()->addPluginsDir($plugin_path);
 			}
 		}
 
 		if ($this->prefilters){
 			foreach ($this->prefilters as $filter) {
-			    $this->registerFilter('pre',$filter);
+				$this->registerFilter('pre',$filter);
 			}
 		}
 
 		if ($this->postfilters){
 			foreach ($this->postfilters as $filter) {
-			    $this->registerFilter('post',$filter);
+				$this->registerFilter('post',$filter);
 			}
 		}
 
 		if ($this->functions){
 			foreach ($this->functions as $name => $plugin) {
-			    $this->getSmarty()->registerPlugin('function',$name,$plugin);
+				$this->getSmarty()->registerPlugin('function',$name,$plugin);
 			}
 		}
 
 		if ($this->modifiers){
 			foreach ($this->modifiers as $name => $plugin) {
-			    $this->getSmarty()->registerPlugin('modifier',$name,$plugin);
+				$this->getSmarty()->registerPlugin('modifier',$name,$plugin);
 			}
 		}
 
@@ -213,19 +213,19 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 	 * @throws CException
 	 */
 	public function registerFilter($type,$filter){
-	    if (is_string($filter)){
-		    if (!function_exists($filter)){
-		        $filter_file = Yii::getPathOfAlias($this->pluginsDir).'/'.$type.'filter.'.$filter.'.php';
-			    if (!file_exists($filter_file)){
-			        throw new CException('Filter file '.$filter_file.' not found');
-			    }
-			    include $filter_file;
-			    if (!function_exists($filter)){
-			        throw new CException('Callback '.$filter.' was not found in the included file');
-			    }
-		    }
-	    }
-	    $this->getSmarty()->registerFilter($type, $filter);
+		if (is_string($filter)){
+			if (!function_exists($filter)){
+				$filter_file = Yii::getPathOfAlias($this->pluginsDir).'/'.$type.'filter.'.$filter.'.php';
+				if (!file_exists($filter_file)){
+					throw new CException('Filter file '.$filter_file.' not found');
+				}
+				include $filter_file;
+				if (!function_exists($filter)){
+					throw new CException('Callback '.$filter.' was not found in the included file');
+				}
+			}
+		}
+		$this->getSmarty()->registerFilter($type, $filter);
 	}
 
 	/**
