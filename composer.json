@@ -1,0 +1,20 @@
+{
+    "name": "yiiext/smarty-renderer",
+    "description": "The Smarty integration for the Yii framework",
+	"keywords": ["yii", "smarty", "renderer"],
+    "minimum-stability": "stable",
+    "type": "yii-extension",
+    "authors": [
+        {
+            "name": "Alexander Makarov",
+            "email": "sam@rmcreative.ru"
+        }
+    ],
+    "require": {
+        "smarty/smarty": ">=v3.1.13",
+        "yiisoft/yii": "*"
+    },
+	"autoload": {
+        "classmap": ["ESmartyViewRenderer.php"]
+    }
+}
