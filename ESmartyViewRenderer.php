@@ -70,6 +70,15 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 	 */
 	public $functions = array();
 
+
+	/**
+	 * @var array A list of the block-plugins to be registered
+	 * @since 1.0.7
+	 *
+	 * Element keys are the function names, values are the callback identifiers (see call_user_func()).
+	 */
+	public $blocks = array();
+
 	/**
 	 * @var array List of modifiers to be registered
 	 * @see $functions, replace 'function' with 'modifier'
@@ -189,6 +198,12 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 			}
 		}
 
+		if ($this->blocks){
+			foreach ($this->blocks as $name => $plugin) {
+			    $this->getSmarty()->registerPlugin('block',$name,$plugin);
+			}
+		}
+		
 		if ($this->modifiers){
 			foreach ($this->modifiers as $name => $plugin) {
 			    $this->getSmarty()->registerPlugin('modifier',$name,$plugin);
