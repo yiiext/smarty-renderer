@@ -8,7 +8,7 @@
  * @link http://yiiext.github.com/extensions/smarty-renderer/index.html
  * @link http://www.smarty.net/
  *
- * @version 1.0.6
+ * @version 1.0.7
  */
 class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 {
