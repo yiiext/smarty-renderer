@@ -1,3 +1,8 @@
+1.0.7
+-----
+
+- Allow registering of block-plugins (netzkind)
+
 1.0.6
 -----
 
