@@ -23,7 +23,7 @@ This extension allows you to use [Smarty](http://www.smarty.net/) version 3 temp
 <?php
 // ...
 'viewRenderer'=>array(
-  'class'=>'application.extensions.yiiext.renderers.smarty.ESmartyViewRenderer',
+  'class'=>'application.vendor.smarty.ESmartyViewRenderer',
     'fileExtension' => '.tpl',
     //'pluginsDir' => 'application.smartyPlugins',
     //'configDir' => 'application.smartyConfig',
