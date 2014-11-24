@@ -14,7 +14,7 @@
     },
     "autoload": {
         "classmap": [
-            "ESmartyViewRenderer.php",
+            "ESmartyViewRenderer.php"
         ]
     }
 }
