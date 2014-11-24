@@ -1,0 +1,20 @@
+{
+    "name": "yiiext/smarty-renderer",
+    "type": "library",
+    "description": "This extension allows you to use Smarty version 3 templates in Yii 1.",
+    "keywords": ["templating", "yii"],
+    "homepage": "https://github.com/yiiext/smarty-renderer",
+
+    "support": {
+        "issues": "https://github.com/yiiext/smarty-renderer/issues",
+        "forum": "http://www.yiiframework.com/forum/index.php?/topic/4925-smarty-view-renderer/"
+    },
+    "require": {
+        "php": ">=5.3"
+    },
+    "autoload": {
+        "classmap": [
+            "ESmartyViewRenderer.php",
+        ]
+    }
+}
