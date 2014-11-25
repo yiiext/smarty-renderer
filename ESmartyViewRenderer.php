@@ -36,10 +36,10 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 	public $pluginsDir;
 
 	/**
-	 * @var string path alias of the directory where the Smarty.class.php file can be found.
-	 * Also plugins and sysplugins directory should be there.
+	 * @var null|string path alias of the directory where the Smarty.class.php file can be found. 
+         * If you use Composer autoload set this option to null
 	 */
-	public $smartyDir = 'application.vendor.Smarty';
+	public $smartyDir;
 
 	/**
 	 * @var array A list of the prefilters to be attached
@@ -115,10 +115,14 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 	public function getSmarty()
 	{
 		if ($this->_smarty === null) {
-			$this->_smarty = new Smarty();
+			$this->initSmarty();
 		}
 	    return $this->_smarty;
 	}
+
+        protected function initSmarty(){
+            $this->_smarty = new Smarty();
+        }
 
 	/**
 	 * Component initialization
@@ -129,7 +133,8 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 		parent::init();
 
 		// adding Smarty library directory to include path
-		Yii::import($this->smartyDir.'.*');
+                if ($this->smartyDir)
+                    Yii::import($this->smartyDir.'.*');
 
 		// need this to avoid Smarty rely on spl autoload function,
 		// this has to be done since we need the Yii autoload handler
@@ -139,13 +144,17 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 			throw new CException('ESmartyViewRenderer cannot work with SMARTY_SPL_AUTOLOAD enabled. Set SMARTY_SPL_AUTOLOAD to 0.');
 		}
 
-		// including Smarty class and registering autoload handler
-		require_once('sysplugins/smarty_internal_data.php');
-		require_once('Smarty.class.php');
-
-		// need this since Yii autoload handler raises an error if class is not found
+		  // including Smarty class manually (if you not use a composer autload)
+                if ($this->smartyDir) {
+                    require_once('sysplugins/smarty_internal_data.php');
+                    require_once('Smarty.class.php');
+                }
+               
+                $this->initSmarty(); //init smarty classes (register a composer autoload) 
+               
+                // need this since Yii autoload handler raises an error if class is not found
 		// Yii autoloader needs to be the last in the autoload chain
-		spl_autoload_unregister('smartyAutoload');
+                spl_autoload_unregister('smartyAutoload');		
 		Yii::registerAutoloader('smartyAutoload');
 
 		// configure smarty
@@ -174,10 +183,15 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 		//for example {include file="application.views.layout.main"}
 		$this->getSmarty()->default_template_handler_func = create_function('$type, $name', 'return Yii::getPathOfAlias($name) . "' . $this->fileExtension .'";'); 
  
-		$this->getSmarty()->addPluginsDir(Yii::getPathOfAlias($this->smartyDir.'.plugins'));
+                //Add plugins dir from current extension
+                $this->getSmarty()->addPluginsDir(dirname(__FILE__) . DIRECTORY_SEPARATOR . "plugins");
+                
+                if ($this->smartyDir)
+                    $this->getSmarty()->addPluginsDir(Yii::getPathOfAlias($this->smartyDir .'.plugins'));
+                
 		if(!empty($this->pluginsDir)){
 		    $plugin_path = Yii::getPathOfAlias($this->pluginsDir);
-			$this->getSmarty()->addPluginsDir($plugin_path);
+                    $this->getSmarty()->addPluginsDir($plugin_path);
 		}
 
 		if ($this->prefilters){
