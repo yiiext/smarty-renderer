@@ -182,11 +182,11 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 		//You shoud set path without extension
 		//for example {include file="application.views.layout.main"}
 		$this->getSmarty()->default_template_handler_func = function($type, $name, &$content, &$modified, Smarty $smarty) use ($fileExstension){
-//                    if (isset(Yii::app()->controller) && Yii::app()->controller != null) {
-//                       return Yii::app()->controller->getViewFile($name);
-//                    }
+                    if (isset(Yii::app()->controller) && Yii::app()->controller != null) {
+                       return Yii::app()->controller->getViewFile($name);
+                    }
                    
-                   //return Yii::getPathOfAlias($name) . $fileExstension; 
+                   return Yii::getPathOfAlias($name) . $fileExstension; 
                 };
                 
                 //Add plugins dir from current extension
