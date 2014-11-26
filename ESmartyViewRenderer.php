@@ -8,7 +8,7 @@
  * @link http://yiiext.github.com/extensions/smarty-renderer/index.html
  * @link http://www.smarty.net/
  *
- * @version 1.0.7
+ * @version 1.0.8
  */
 class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 {
@@ -181,8 +181,14 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
 		//Register default template handler. This allow us to use yii aliases in the smarty templates.
 		//You shoud set path without extension
 		//for example {include file="application.views.layout.main"}
-		$this->getSmarty()->default_template_handler_func = create_function('$type, $name', 'return Yii::getPathOfAlias($name) . "' . $this->fileExtension .'";'); 
- 
+		$this->getSmarty()->default_template_handler_func = function($type, $name, &$content, &$modified, Smarty $smarty) use ($fileExstension){
+//                    if (isset(Yii::app()->controller) && Yii::app()->controller != null) {
+//                       return Yii::app()->controller->getViewFile($name);
+//                    }
+                   
+                   //return Yii::getPathOfAlias($name) . $fileExstension; 
+                };
+                
                 //Add plugins dir from current extension
                 $this->getSmarty()->addPluginsDir(dirname(__FILE__) . DIRECTORY_SEPARATOR . "plugins");
                 

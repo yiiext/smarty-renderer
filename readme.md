@@ -12,8 +12,38 @@ This extension allows you to use [Smarty](http://www.smarty.net/) version 3 temp
 ###Requirements
 * Yii 1.0 or above
 * Smarty 3.0.6 or above
+* PHP 5.3 or above
 
 ###Installation
+
+#### Via Composer
+* Add folowing to you composer.json
+
+~~~json
+{
+    "require": {
+        ...
+        "smarty/smarty": "v3.1.*",
+        "yiiext/smarty-renderer": "dev-master"
+        ...
+    }
+}
+~~~
+
+* Run in console `composer update`
+* Add the following to your config file 'components' section:
+
+~~~php
+<?php
+// ...
+    'viewRenderer' => array(
+        'class' => 'application.vendor.yiiext.smarty-renderer.ESmartyViewRenderer', //from yii 1.1.16 you can set only ESmartyViewRenderer instead of full path alias. Other work will be done with composer autoload.
+        'fileExtension' => '.tpl'
+        //... any other extension params (will be described below)
+    ),
+~~~
+
+#### Manually
 * Extract the release file under `vendor/Smarty`.
 * [Download](http://www.smarty.net/download.php) and extract `libs` folder contents of Smarty package under `protected/vendor/Smarty`.
 * Move files from `plugins` folder to `protected/vendor/Smarty/plugins`.
@@ -24,6 +54,7 @@ This extension allows you to use [Smarty](http://www.smarty.net/) version 3 temp
 // ...
 'viewRenderer'=>array(
   'class'=>'application.vendor.smarty.ESmartyViewRenderer',
+    'smartyDir' => 'application.vendor.Smarty'.
     'fileExtension' => '.tpl',
     //'pluginsDir' => 'application.smartyPlugins',
     //'configDir' => 'application.smartyConfig',
@@ -35,7 +66,7 @@ This extension allows you to use [Smarty](http://www.smarty.net/) version 3 temp
     //)
 ),
 ~~~
-There are some more options on configuring Smarty properties now. Will add documentation soon.
+There are some more low-level options. Check code for this.
 
 ###Usage
 * [Smarty documentation](http://www.smarty.net/docs.php).
@@ -44,8 +75,13 @@ There are some more options on configuring Smarty properties now. Will add docum
 	You have to set path without extension
 	{extends file="application.views.layout.main"} 
 	{include file="application.views.controller._form"}
-	
-	Also you can use regular Smarty syntax for file path wich relative to current `views` directory:
+
+        You can include or extend files relative to current controller
+        For example add folowing code to view file /views/entities/index.tpl
+	{include file="_table"}	
+        This line includes /views/entities/_table.tpl
+
+	Also you can use regular Smarty syntax for file path that relative to current `views` directory:
 	{include file="controller/_form.tpl"}
 ~~~
 * Current controller properties are accessible via `{$this->pageTitle}`.
@@ -68,12 +104,17 @@ There are some more options on configuring Smarty properties now. Will add docum
   	{/begin_widget} 
 ~~~
 
-* Form plugin is a syntax-sugar plugin for Yii ActiveForm. Syntax:
+* Form plugin is a syntax-sugar for Yii ActiveForm. Syntax:
 ~~~ smarty
    {form name="product_form" id='form' type='horizontal' otherParam="value" [...]}
 		{*Form object are accessible via variable with name equal to form name*}
         {$product_form->textFieldRow($this->model, 'name', ['class'=>'span5','maxlength'=>255])}
    {/form} 
+~~~
+
+* RegisterPackage plugin is a shortcut for `CClientScript::registerPackage()`:
+~~~ smarty
+  {register_package name="bootstrap"}
 ~~~
 
 * `t()` function allows to translate strings using Yii::t(). Syntax:

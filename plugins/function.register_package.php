@@ -1,9 +1,9 @@
 <?php
 /**
- * Allows to register package via CclientScript
+ * Allows to register package via CClientScript
  *
  *
- * @see CBaseController::widget().
+ * @see CClientScript::registerPackage().
  * 
  * @param array $params
  * @param Smarty $smarty
