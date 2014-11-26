@@ -12,7 +12,7 @@ This extension allows you to use [Smarty](http://www.smarty.net/) version 3 temp
 ###Requirements
 * Yii 1.0 or above
 * Smarty 3.0.6 or above
-* PHP 5.3 or above
+* PHP 5.2 or above
 
 ###Installation
 
