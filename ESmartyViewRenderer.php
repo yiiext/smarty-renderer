@@ -185,7 +185,7 @@ class ESmartyViewRenderer extends CApplicationComponent implements IViewRenderer
                        return Yii::app()->controller->getViewFile(\$name);
                     }
                    
-                   return Yii::getPathOfAlias(\$name) . '{$this->fileExtension}; ");
+                   return Yii::getPathOfAlias(\$name) . '{$this->fileExtension}'; ");
                 
                 //Add plugins dir from current extension
                 $this->getSmarty()->addPluginsDir(dirname(__FILE__) . DIRECTORY_SEPARATOR . "plugins");
