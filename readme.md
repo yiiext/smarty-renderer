@@ -37,7 +37,8 @@ This extension allows you to use [Smarty](http://www.smarty.net/) version 3 temp
 <?php
 // ...
     'viewRenderer' => array(
-        'class' => 'application.vendor.yiiext.smarty-renderer.ESmartyViewRenderer', //from yii 1.1.16 you can set only ESmartyViewRenderer instead of full path alias. Other work will be done with composer autoload.
+        'class' => 'application.vendor.yiiext.smarty-renderer.ESmartyViewRenderer', 
+        //from yii 1.1.16 you can set only ESmartyViewRenderer instead of full path alias. Other work will be done with composer autoload.
         'fileExtension' => '.tpl'
         //... any other extension params (will be described below)
     ),
@@ -54,7 +55,7 @@ This extension allows you to use [Smarty](http://www.smarty.net/) version 3 temp
 // ...
 'viewRenderer'=>array(
   'class'=>'application.vendor.smarty.ESmartyViewRenderer',
-    'smartyDir' => 'application.vendor.Smarty'.
+    'smartyDir' => 'application.vendor.Smarty',
     'fileExtension' => '.tpl',
     //'pluginsDir' => 'application.smartyPlugins',
     //'configDir' => 'application.smartyConfig',
