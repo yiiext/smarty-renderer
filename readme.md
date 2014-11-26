@@ -38,9 +38,10 @@ This extension allows you to use [Smarty](http://www.smarty.net/) version 3 temp
 // ...
     'viewRenderer' => array(
         'class' => 'application.vendor.yiiext.smarty-renderer.ESmartyViewRenderer', 
-        //from yii 1.1.16 you can set only ESmartyViewRenderer instead of full path alias. Other work will be done with composer autoload.
+        //from yii 1.1.16 you can set only classname (ESmartyViewRenderer) instead of full path alias. 
+        //Other work will be done with composer autoload.
         'fileExtension' => '.tpl'
-        //... any other extension params (will be described below)
+        //...any other extension params (will be described below)
     ),
 ~~~
 
@@ -73,16 +74,16 @@ There are some more low-level options. Check code for this.
 * [Smarty documentation](http://www.smarty.net/docs.php).
 * You can use Yii aliases for including files inside the template. For example: 
 ~~~ smarty
-	You have to set path without extension
+	{*You have to set path without extension*}
 	{extends file="application.views.layout.main"} 
 	{include file="application.views.controller._form"}
 
-        You can include or extend files relative to current controller
-        For example add folowing code to view file /views/entities/index.tpl
+	{*You can include or extend files relative to current controller*}
+	{*For example add folowing code to view file /views/entities/index.tpl*}
 	{include file="_table"}	
-        This line includes /views/entities/_table.tpl
+	{*This line includes /views/entities/_table.tpl*}
 
-	Also you can use regular Smarty syntax for file path that relative to current `views` directory:
+	{*Also you can use regular Smarty syntax for file path that relative to current `views` directory:*}
 	{include file="controller/_form.tpl"}
 ~~~
 * Current controller properties are accessible via `{$this->pageTitle}`.
