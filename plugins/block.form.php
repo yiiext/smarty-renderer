@@ -21,8 +21,10 @@ require_once 'block.begin_widget.php';
  */
 function smarty_block_form($params, $content, $template, &$repeat) {
     $formName = $params['name'];
-    
-    $params['name'] = 'CActiveForm';
+
+    $widgetClass = Yii::app()->params['defaultActiveFormWidget'];
+    $params['name'] = $widgetClass ? $widgetClass : 'CActiveForm';
+
     smarty_block_begin_widget($params, $content, $template, $repeat);
     
     if ($repeat) { //assign variable only on open tag
