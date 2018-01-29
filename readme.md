@@ -3,17 +3,17 @@ Smarty view renderer
 
 This extension allows you to use [Smarty](http://www.smarty.net/) version 3 templates in Yii.
 
-###Resources
+### Resources
 * [Github](https://github.com/yiiext/smarty-renderer)
 * [Smarty](http://www.smarty.net/)
 * [Discuss](http://www.yiiframework.com/forum/index.php?/topic/4925-smarty-view-renderer/)
 * [Report a bug](https://github.com/yiiext/smarty-renderer/issues)
 
-###Requirements
+### Requirements
 * Yii 1.0 or above
 * Smarty 3.0.6 or above
 
-###Installation
+### Installation
 * Extract the release file under `vendor/Smarty`.
 * [Download](http://www.smarty.net/download.php) and extract `libs` folder contents of Smarty package under `protected/vendor/Smarty`.
 * Move files from `plugins` folder to `protected/vendor/Smarty/plugins`.
@@ -37,7 +37,7 @@ This extension allows you to use [Smarty](http://www.smarty.net/) version 3 temp
 ~~~
 There are some more options on configuring Smarty properties now. Will add documentation soon.
 
-###Usage
+### Usage
 * [Smarty documentation](http://www.smarty.net/docs.php).
 * You can use Yii aliases for including files inside the template. For example: 
 ~~~ smarty
@@ -52,7 +52,7 @@ There are some more options on configuring Smarty properties now. Will add docum
 * Yii properties are available as follows: `{Yii::app()->theme->baseUrl}`.
 * Used memory is stored in `{$MEMORY}`, used time is in `{$TIME}`.
 
-###Smarty Plugins
+### Smarty Plugins
 * `widget` and `begin_widget` plugins allow use Yii widgets in this way: 
 ~~~ smarty
 	{*Render widget without params*}
